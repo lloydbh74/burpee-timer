@@ -1,0 +1,84 @@
+.countdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-bg-main);
+    z-index: 50;
+}
+
+.countdown-number {
+    font-size: 10rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.workout-session {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Ensure controls are visible over metronome */
+}
+
+.session-info {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    pointer-events: none;
+    /* Let taps pass through if needed, but buttons handle pointer */
+}
+
+.rep-counter,
+.set-counter {
+    font-family: var(--font-family-mono);
+}
+
+.rep-counter .value {
+    font-size: 6rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.rep-counter .total {
+    font-size: 2rem;
+    color: var(--color-text-muted);
+}
+
+.set-counter .value {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.stop-btn {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    pointer-events: auto;
+    background: rgba(255, 0, 0, 0.2);
+    color: #fff;
+    z-index: 20;
+}
+
+.finished-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}

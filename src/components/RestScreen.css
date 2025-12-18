@@ -1,0 +1,57 @@
+.rest-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-mode-rest);
+    /* Work is Green, wait Spec says Rest is Green? Spec: "Rest State: Screen turns Solid Green." US5: "Green screen for rest" */
+    /* Re-reading Spec: "US5: As a user, I want clear visual cues (Green screen) for rest periods" */
+    /* Usually Green = Go, Red = Stop. But spec says Green for Rest? */
+    /* Spec 3.3: "Rest State: Screen turns Solid Green." */
+    /* Ok, I will follow Spec. Maybe "Green light to recover"? or "Green means safe"? */
+    /* But usually Work = Intense. */
+    /* If Metronome is filling up, what color? */
+    /* Metronome US4: "visual metronome bar". 3.3: "Active State (Work): Full-screen vertical progress bar". */
+    /* Let's follow spec strictly. Rest = Green. */
+
+    /* Actually, let's use a distinct Green for Rest, and maybe Metronome is standard/theme color? */
+    /* Variables: --color-primary was Green. --color-secondary was Red. */
+    /* I'll use Primary for Rest then? Or maybe a Calming Green? */
+    /* And Work is... ? Feature spec doesn't specify Work color, only "Metronome bar". */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.rest-content {
+    text-align: center;
+    color: #000;
+    /* Green bg => Dark text usually better contrast */
+}
+
+.countdown {
+    font-size: 8rem;
+    font-weight: 800;
+    font-family: var(--font-family-mono);
+    line-height: 1;
+}
+
+/* Flashing Animation */
+@keyframes flash-opacity {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.flashing {
+    animation: flash-opacity 0.5s infinite;
+}

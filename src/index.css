@@ -1,0 +1,91 @@
+:root {
+  /* Color Palette */
+  --color-primary: #00E054;
+  /* Keeping as default Green for now or legacy */
+  --color-mode-work: #2979FF;
+  /* Blue for Work/Reps */
+  --color-mode-work-dim: #1565C0;
+  --color-mode-rest: #00E054;
+  /* Green for Rest */
+  --color-secondary: #FF4B4B;
+  /* Alert Red */
+  --color-bg-main: #121212;
+  /* Deep Dark Background */
+  --color-bg-surface: #1E1E1E;
+  /* Card/Surface Background */
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #A0A0A0;
+
+  /* Typography */
+  --font-family-base: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Layout */
+  --max-width: 600px;
+  /* Focus on mobile-first/tablet centered */
+  --header-height: 60px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-family-base);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-weight: 600;
+  font-family: inherit;
+  transition: transform 0.1s ease, filter 0.2s;
+}
+
+button:active {
+  transform: scale(0.98);
+}
