@@ -2,30 +2,47 @@ export class SoundManager {
     private ctx: AudioContext | null = null;
 
     constructor() {
-        // Do not init in constructor to avoid "Autoplay" warnings before user interaction
+        // Automatically set up global unlock listeners
+        if (typeof window !== 'undefined') {
+            const unlockHandler = () => {
+                this.unlock();
+                // Remove listeners once triggers
+                window.removeEventListener('touchstart', unlockHandler);
+                window.removeEventListener('click', unlockHandler);
+                window.removeEventListener('keydown', unlockHandler);
+            };
+
+            window.addEventListener('touchstart', unlockHandler, { passive: true });
+            window.addEventListener('click', unlockHandler, { passive: true });
+            window.addEventListener('keydown', unlockHandler, { passive: true });
+        }
     }
 
-    async unlock() {
+    unlock() {
+        // Synchronous check and create
         if (!this.ctx) {
             try {
                 this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-            } catch (e) {
-                console.warn('Web Audio API not supported', e);
-                return;
-            }
-        }
-        if (this.ctx.state === 'suspended') {
-            await this.ctx.resume();
+            } catch (e) { return; }
         }
 
-        // Play silent sound to trigger iOS audio unlock
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        gain.gain.value = 0.001; // Nearly silent
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(0);
-        osc.stop(this.ctx.currentTime + 0.01);
+        // Synchronous resume call (don't await here for the interaction token)
+        if (this.ctx.state === 'suspended') {
+            this.ctx.resume().catch(e => console.warn('Audio resume failed', e));
+        }
+
+        // Play silent sound instantly
+        try {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            gain.gain.value = 0.001;
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(0);
+            osc.stop(this.ctx.currentTime + 0.01);
+        } catch (e) {
+            // Ignore (context might not be ready)
+        }
     }
 
     async resume() {

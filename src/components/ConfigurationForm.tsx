@@ -12,9 +12,10 @@ export function ConfigurationForm({ onStart }: Props) {
     const [setSize, setSetSize] = useState(10);
     const [ratio, setRatio] = useState(3); // 3:1 default
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        await soundManager.unlock();
+        // Fallback unlock (fire and forget, synchronous-ish)
+        soundManager.unlock();
         onStart({ totalReps, setSize, ratio });
     };
 
