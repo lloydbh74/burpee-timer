@@ -14,7 +14,7 @@ export function ConfigurationForm({ onStart }: Props) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await soundManager.init();
+        await soundManager.unlock();
         onStart({ totalReps, setSize, ratio });
     };
 
