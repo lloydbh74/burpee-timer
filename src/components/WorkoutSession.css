@@ -36,6 +36,7 @@
     gap: var(--spacing-lg);
     pointer-events: none;
     /* Let taps pass through if needed, but buttons handle pointer */
+    z-index: 5;
 }
 
 .rep-counter,
