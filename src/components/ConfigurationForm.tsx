@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { SessionParams } from '../utils/calculator';
+import { soundManager } from '../utils/SoundManager';
 import './ConfigurationForm.css';
 
 interface Props {
@@ -11,8 +12,9 @@ export function ConfigurationForm({ onStart }: Props) {
     const [setSize, setSetSize] = useState(10);
     const [ratio, setRatio] = useState(3); // 3:1 default
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        await soundManager.resume();
         onStart({ totalReps, setSize, ratio });
     };
 

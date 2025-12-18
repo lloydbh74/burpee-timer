@@ -9,6 +9,16 @@ export class SoundManager {
         }
     }
 
+    async resume() {
+        if (this.ctx && this.ctx.state === 'suspended') {
+            await this.ctx.resume();
+        }
+        // Try to create if missing (defensive)
+        if (!this.ctx) {
+            this.ensureContext();
+        }
+    }
+
     private ensureContext() {
         if (this.ctx && this.ctx.state === 'suspended') {
             this.ctx.resume();

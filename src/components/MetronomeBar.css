@@ -1,15 +1,14 @@
 .metronome-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    /* Mobile viewport fix */
+    height: 100%;
     z-index: 1;
-    /* Behind everything */
-    background: var(--color-bg-main);
+    /* Behind controls but above background */
+    background: transparent;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .metronome-bar {

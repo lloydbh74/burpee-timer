@@ -22,7 +22,10 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    /* Ensure controls are visible over metronome */
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--color-bg-main);
+    /* Move background here to form base layer */
 }
 
 .session-info {
