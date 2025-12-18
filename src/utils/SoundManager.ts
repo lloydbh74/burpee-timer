@@ -5,7 +5,7 @@ export class SoundManager {
         // Do not init in constructor to avoid "Autoplay" warnings before user interaction
     }
 
-    async init() {
+    async unlock() {
         if (!this.ctx) {
             try {
                 this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -17,6 +17,15 @@ export class SoundManager {
         if (this.ctx.state === 'suspended') {
             await this.ctx.resume();
         }
+
+        // Play silent sound to trigger iOS audio unlock
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        gain.gain.value = 0.001; // Nearly silent
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(0);
+        osc.stop(this.ctx.currentTime + 0.01);
     }
 
     async resume() {
