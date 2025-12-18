@@ -17,11 +17,5 @@
     left: 0;
     width: 100%;
     background: linear-gradient(to top, var(--color-mode-work) 0%, var(--color-mode-work-dim) 100%);
-    transition: height 16ms linear;
-    /* Note: transition might smooth out jitters but React state updates might be enough if 60fps.
-     If relying on state `progress`, transition should be very short or none to avoid lag.
-     Actually, if we update every frame, we don't want CSS transition fighting us.
-     Let's try 0ms first or very small.
-  */
     will-change: height;
 }

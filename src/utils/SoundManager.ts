@@ -2,10 +2,20 @@ export class SoundManager {
     private ctx: AudioContext | null = null;
 
     constructor() {
-        try {
-            this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-        } catch (e) {
-            console.warn('Web Audio API not supported', e);
+        // Do not init in constructor to avoid "Autoplay" warnings before user interaction
+    }
+
+    async init() {
+        if (!this.ctx) {
+            try {
+                this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+            } catch (e) {
+                console.warn('Web Audio API not supported', e);
+                return;
+            }
+        }
+        if (this.ctx.state === 'suspended') {
+            await this.ctx.resume();
         }
     }
 
@@ -32,8 +42,8 @@ export class SoundManager {
     }
 
     playBeep() {
-        const ctx = this.ensureContext();
-        if (!ctx) return;
+        if (!this.ctx) return;
+        const ctx = this.ctx;
 
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -53,8 +63,8 @@ export class SoundManager {
     }
 
     playCountdown() {
-        const ctx = this.ensureContext();
-        if (!ctx) return;
+        if (!this.ctx) return;
+        const ctx = this.ctx;
 
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -73,8 +83,8 @@ export class SoundManager {
     }
 
     playSuccess() {
-        const ctx = this.ensureContext();
-        if (!ctx) return;
+        if (!this.ctx) return;
+        const ctx = this.ctx;
 
         // A Major chord arpeggio or chime
         const freqs = [554.37, 659.25, 880]; // C#5, E5, A5
